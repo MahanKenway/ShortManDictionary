@@ -1,0 +1,56 @@
+{
+  "name": "UserSlang",
+  "type": "object",
+  "properties": {
+    "word": {
+      "type": "string"
+    },
+    "pronunciation": {
+      "type": "string"
+    },
+    "partOfSpeech": {
+      "type": "string",
+      "enum": [
+        "noun",
+        "verb",
+        "adjective",
+        "adverb",
+        "exclamation",
+        "phrase"
+      ]
+    },
+    "meaning": {
+      "type": "string"
+    },
+    "internetMeaning": {
+      "type": "string"
+    },
+    "examples": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Gaming",
+        "TikTok",
+        "Reddit",
+        "Meme"
+      ]
+    },
+    "whereYouSeeIt": {
+      "type": "string"
+    },
+    "vibeRating": {
+      "type": "string"
+    },
+    "votes": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "word",
+    "meaning",
+    "category"
+  ]
+}

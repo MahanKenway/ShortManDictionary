@@ -85,4 +85,32 @@ export default function SearchBar({ onSearch, onSelectEntry, onRandom }) {
           >
             <Shuffle className="w-4 h-4" />
             <span className="hidden sm:inline">Random</span>
- 
+          </button>
+        </div>
+      </div>
+
+      {showSuggestions && suggestions.length > 0 && (
+        <div className="absolute top-full mt-2 left-0 right-0 bg-card border border-border rounded-2xl shadow-xl z-50 overflow-hidden">
+          {suggestions.map((entry, i) => (
+            <button
+              key={entry.id}
+              onClick={() => handleSelect(entry)}
+              className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted transition-colors border-b border-border last:border-0"
+            >
+              <span className="text-xl">{entry.vibeRating.split("")[0]}</span>
+              <div>
+                <div className="font-bold text-foreground font-heading">{entry.word}</div>
+                <div className="text-sm text-muted-foreground truncate max-w-xs">{entry.meaning}</div>
+              </div>
+              <div className="ml-auto flex gap-1">
+                {entry.category.slice(0, 2).map(cat => (
+                  <span key={cat} className="px-2 py-0.5 rounded-full text-xs bg-primary/10 text-primary font-medium">{cat}</span>
+                ))}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

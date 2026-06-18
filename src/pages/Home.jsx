@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { slangEntries, getEntriesByLetter, getEntriesByCategory, getRandomEntry } from "@/data/slangData";
+import { slangEntries, getRandomEntry } from "@/data/slangData";
 import Header from "@/components/dictionary/Header";
 import AlphabetSidebar from "@/components/dictionary/AlphabetSidebar";
 import EntryCard from "@/components/dictionary/EntryCard";
@@ -35,7 +35,7 @@ export default function Home() {
     } else {
       document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem("shortman_dark", darkMode);
+    localStorage.setItem("shortman_dark", String(darkMode));
   }, [darkMode]);
 
   // Persist favorites

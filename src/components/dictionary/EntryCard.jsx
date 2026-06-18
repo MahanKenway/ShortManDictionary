@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Heart, Share2, ChevronDown, ChevronUp } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import ShareModal from "./ShareModal";
 
 const categoryColors = {
@@ -23,6 +23,7 @@ export default function EntryCard({ entry, isFavorite, onToggleFavorite, brainro
   const [showShare, setShowShare] = useState(false);
 
   const displayMeaning = brainrotMode ? entry.brainrotMeaning : entry.internetMeaning;
+  const entryCategories = Array.isArray(entry.category) ? entry.category : [entry.category];
 
   return (
     <>
@@ -74,8 +75,8 @@ export default function EntryCard({ entry, isFavorite, onToggleFavorite, brainro
 
           {/* Categories */}
           <div className="flex flex-wrap gap-1.5 mb-3">
-            {entry.category.map(cat => (
-              <span key={cat} className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide ${categoryColors[cat] || "bg-muted text-muted-foreground"}`}>
+            {entryCategories.map(cat => (
+              <span key={cat} className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide ${categoryColors[String(cat).toLowerCase()] || "bg-muted text-muted-foreground"}`}>
                 {cat}
               </span>
             ))}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, Share2, Volume2, ExternalLink } from "lucide-react";
+import { Heart, Share2 } from "lucide-react";
 
 const platformColors = {
   "TikTok": "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300",

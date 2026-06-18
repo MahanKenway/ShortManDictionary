@@ -781,6 +781,9 @@ export const slangData = [
   }
 ];
 
+// Backward-compatible alias for legacy dictionary components.
+export const slangEntries = slangData;
+
 export const categories = ["All", "Gaming", "TikTok", "Reddit", "Meme Terms"];
 
 export const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");

@@ -103,7 +103,7 @@ export default function SearchBar({ onSearch, onSelectEntry, onRandom }) {
                 <div className="text-sm text-muted-foreground truncate max-w-xs">{entry.meaning}</div>
               </div>
               <div className="ml-auto flex gap-1">
-                {entry.category.slice(0, 2).map(cat => (
+                {(Array.isArray(entry.category) ? entry.category : [entry.category]).slice(0, 2).map(cat => (
                   <span key={cat} className="px-2 py-0.5 rounded-full text-xs bg-primary/10 text-primary font-medium">{cat}</span>
                 ))}
               </div>

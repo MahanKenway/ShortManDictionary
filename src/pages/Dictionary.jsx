@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { slangData, filterByCategory, getEntriesByLetter, searchEntries } from "@/data/slangData";
+import { slangData, getEntriesByLetter, searchEntries } from "@/data/slangData";
 import Header from "@/components/Header";
 import AlphabetSidebar from "@/components/AlphabetSidebar";
 import EntryCard from "@/components/EntryCard";
@@ -29,13 +29,18 @@ export default function Dictionary() {
   const [userSlang, setUserSlang] = useState([]);
   const [activeTab2, setActiveTab2] = useState("official"); // "official" | "community"
 
-  useEffect(() => {
-    base44.entities.UserSlang.list("-created_date", 100).then(setUserSlang);
+  const refreshUserSlang = useCallback(() => {
+    base44.entities.UserSlang.list("-created_date", 100)
+      .then(setUserSlang)
+      .catch((error) => {
+        console.warn("Community entries are unavailable in this environment:", error);
+        setUserSlang([]);
+      });
   }, []);
 
-  const refreshUserSlang = () => {
-    base44.entities.UserSlang.list("-created_date", 100).then(setUserSlang);
-  };
+  useEffect(() => {
+    refreshUserSlang();
+  }, [refreshUserSlang]);
 
   // Dark mode effect
   useEffect(() => {
@@ -44,7 +49,7 @@ export default function Dictionary() {
     } else {
       document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem("shortman-dark", darkMode);
+    localStorage.setItem("shortman-dark", String(darkMode));
   }, [darkMode]);
 
   // Persist favorites
@@ -248,9 +253,13 @@ export default function Dictionary() {
                     <div className="mt-4 pt-3 border-t border-border/50 flex items-center gap-2">
                       <button
                         onClick={async () => {
-                          const newVotes = (entry.votes || 0) + 1;
-                          await base44.entities.UserSlang.update(entry.id, { votes: newVotes });
-                          refreshUserSlang();
+                          try {
+                            const newVotes = (entry.votes || 0) + 1;
+                            await base44.entities.UserSlang.update(entry.id, { votes: newVotes });
+                            refreshUserSlang();
+                          } catch (error) {
+                            console.warn("Could not upvote community entry:", error);
+                          }
                         }}
                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted hover:bg-primary/10 hover:text-primary text-muted-foreground text-sm font-medium transition-all"
                       >

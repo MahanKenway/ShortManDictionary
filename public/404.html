@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ShortMan Dictionary</title>
+    <script>
+      const path = window.location.pathname;
+      const repo = path.split('/').filter(Boolean)[0] || '';
+      const base = repo ? `/${repo}/` : '/';
+      const redirect = `${base}?redirect=${encodeURIComponent(path + window.location.search + window.location.hash)}`;
+      window.location.replace(redirect);
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to ShortMan Dictionary…</p>
+  </body>
+</html>

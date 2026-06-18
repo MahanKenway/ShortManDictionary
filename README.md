@@ -1,7 +1,12 @@
 [README.md](https://github.com/user-attachments/files/29115161/README.md)
 # ShortManDictionary<div align="center">
 
+
+LINK WEBSITE : https://mahankenway.github.io/ShortManDictionary/
+
+
 ```
+
  ____  _  _  ___  ____  ____  __  __    __    _  _
 / ___)/ )( \/ _ \(  _ \(_  _)(  \/  )  /__\  ( \( )
 \___ \) __ ( (_) ))   /  )(   )    (  /(__)\  )  (

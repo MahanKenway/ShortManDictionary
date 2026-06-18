@@ -1,45 +1,20 @@
 import React from "react";
-import { alphabet, slangEntries } from "@/data/slangData";
 
-export default function AlphabetSidebar({ activeLetter, onSelectLetter }) {
-  const lettersWithEntries = new Set(
-    slangEntries.map(e => e.word[0].toUpperCase())
-  );
-
+export default function BrainrotToggle({ active = false, onToggle }) {
   return (
-    <nav className="w-14 flex-shrink-0">
-      <div className="sticky top-6 bg-card border border-border rounded-2xl shadow-sm overflow-hidden">
-        <div className="py-2">
-          <button
-            onClick={() => onSelectLetter(null)}
-            className={`w-full py-1.5 text-xs font-bold transition-colors ${
-              activeLetter === null
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted"
-            }`}
-          >
-            ALL
-          </button>
-          {alphabet.map(letter => {
-            const hasEntries = lettersWithEntries.has(letter);
-            return (
-              <button
-                key={letter}
-                onClick={() => hasEntries && onSelectLetter(letter)}
-                className={`w-full py-1.5 text-sm font-semibold transition-all ${
-                  activeLetter === letter
-                    ? "bg-primary text-primary-foreground font-bold"
-                    : hasEntries
-                    ? "text-foreground hover:bg-muted hover:text-primary cursor-pointer"
-                    : "text-border cursor-not-allowed"
-                }`}
-              >
-                {letter}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </nav>
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-pressed={active}
+      title="Toggle brainrot mode"
+      className={`px-3 py-2 rounded-xl text-xs font-black transition-all active:scale-95 ${
+        active
+          ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/20"
+          : "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
+      }`}
+    >
+      🧠💀
+      <span className="hidden sm:inline ml-1">Brainrot</span>
+    </button>
   );
 }

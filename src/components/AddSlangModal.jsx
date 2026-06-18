@@ -23,10 +23,16 @@ export default function AddSlangModal({ onClose, onAdded }) {
     }
     setLoading(true);
     setError("");
-    await base44.entities.UserSlang.create(form);
-    setLoading(false);
-    onAdded();
-    onClose();
+    try {
+      await base44.entities.UserSlang.create(form);
+      onAdded();
+      onClose();
+    } catch (err) {
+      console.error("Failed to add community slang:", err);
+      setError(err?.message || "Could not add this slang right now. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

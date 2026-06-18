@@ -253,9 +253,13 @@ export default function Dictionary() {
                     <div className="mt-4 pt-3 border-t border-border/50 flex items-center gap-2">
                       <button
                         onClick={async () => {
-                          const newVotes = (entry.votes || 0) + 1;
-                          await base44.entities.UserSlang.update(entry.id, { votes: newVotes });
-                          refreshUserSlang();
+                          try {
+                            const newVotes = (entry.votes || 0) + 1;
+                            await base44.entities.UserSlang.update(entry.id, { votes: newVotes });
+                            refreshUserSlang();
+                          } catch (error) {
+                            console.warn("Could not upvote community entry:", error);
+                          }
                         }}
                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted hover:bg-primary/10 hover:text-primary text-muted-foreground text-sm font-medium transition-all"
                       >

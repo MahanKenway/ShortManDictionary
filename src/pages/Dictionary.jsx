@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { slangData, filterByCategory, getEntriesByLetter, searchEntries } from "@/data/slangData";
+import { slangData, getEntriesByLetter, searchEntries } from "@/data/slangData";
 import Header from "@/components/Header";
 import AlphabetSidebar from "@/components/AlphabetSidebar";
 import EntryCard from "@/components/EntryCard";
@@ -29,13 +29,18 @@ export default function Dictionary() {
   const [userSlang, setUserSlang] = useState([]);
   const [activeTab2, setActiveTab2] = useState("official"); // "official" | "community"
 
-  useEffect(() => {
-    base44.entities.UserSlang.list("-created_date", 100).then(setUserSlang);
+  const refreshUserSlang = useCallback(() => {
+    base44.entities.UserSlang.list("-created_date", 100)
+      .then(setUserSlang)
+      .catch((error) => {
+        console.warn("Community entries are unavailable in this environment:", error);
+        setUserSlang([]);
+      });
   }, []);
 
-  const refreshUserSlang = () => {
-    base44.entities.UserSlang.list("-created_date", 100).then(setUserSlang);
-  };
+  useEffect(() => {
+    refreshUserSlang();
+  }, [refreshUserSlang]);
 
   // Dark mode effect
   useEffect(() => {
@@ -44,7 +49,7 @@ export default function Dictionary() {
     } else {
       document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem("shortman-dark", darkMode);
+    localStorage.setItem("shortman-dark", String(darkMode));
   }, [darkMode]);
 
   // Persist favorites

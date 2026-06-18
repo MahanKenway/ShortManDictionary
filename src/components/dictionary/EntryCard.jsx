@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Heart, Share2, ChevronDown, ChevronUp } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import ShareModal from "./ShareModal";
 
 const categoryColors = {

@@ -1,6 +1,7 @@
 <div align="center">
 
 # 📗 ShortMan Dictionary
+<img width="1528" height="938" alt="Image" src="https://github.com/user-attachments/assets/8ae31b8e-6683-4b65-9219-40d0c750717c" />
 
 ### *The dictionary Longman is too scared to publish.*
 
